@@ -5,7 +5,7 @@ delay = 0.1
 # set up rhe screen
 wn = turtle.Screen()
 wn.title("Snake game")
-wn.bgcolor("green")
+wn.bgcolor("black")
 wn.setup(width=600, height=600)
 wn.tracer(0) # turns of the screen update
 
@@ -13,7 +13,7 @@ wn.tracer(0) # turns of the screen update
 head = turtle.Turtle()
 head.speed(0)
 head.shape("square")
-head.color("black")
+head.color("green")
 head.penup()
 head.goto(0, 0)
 head.direction = "stop"

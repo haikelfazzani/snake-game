@@ -1,5 +1,7 @@
-import turtle, time
+import time, random
 from init import *  
+
+segments = []
 
 # Snake move
 def move():
@@ -38,6 +40,30 @@ wn.onkeypress(go_right, "d")
 # Main
 while True:
 	wn.update()
+
+	# check for collision with food
+	if head.distance(food) < 20:
+		x = random.randint(-290, 290)
+		y = random.randint(-290, 290)
+		food.goto(x, y)
+
+		new_segment = turtle.Turtle()
+		new_segment.speed(0)
+		new_segment.shape("square")
+		new_segment.color('grey')
+		new_segment.penup()
+		segments.append(new_segment)
+
+	for index in range(len(segments)-1, -1,-1):
+		x = segments[index-1].xcor()
+		y = segments[index-1].ycor()
+		segments[index].goto(x, y)
+
+	if len(segments) > 0:
+		x = head.xcor()
+		y = head.ycor()
+		segments[0].goto(x, y)
+
 	move()
 	time.sleep(delay)
 
