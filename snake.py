@@ -37,9 +37,22 @@ wn.onkeypress(go_down, "s")
 wn.onkeypress(go_left, "q")
 wn.onkeypress(go_right, "d")
 
+# check for collision with borders
+def check_collision_borders():
+	if head.xcor() > 290 or head.xcor() < -290 or head.ycor() > 290 or head.ycor() < -290:
+		time.sleep(1)
+		head.goto(0, 0)
+		head.direction = "stop"		
+	
+		for i in segments:
+			i.getturtle().reset()
+
+		segments.clear()
 # Main
 while True:
 	wn.update()
+
+	check_collision_borders()
 
 	# check for collision with food
 	if head.distance(food) < 20:
