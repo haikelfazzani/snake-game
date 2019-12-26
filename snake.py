@@ -1,6 +1,7 @@
 import time, random
 from init import *  
 
+score = 0
 segments = []
 
 # Snake move
@@ -42,16 +43,17 @@ def check_collision_borders():
 	if head.xcor() > 290 or head.xcor() < -290 or head.ycor() > 290 or head.ycor() < -290:
 		time.sleep(1)
 		head.goto(0, 0)
-		head.direction = "stop"		
+		head.direction = "stop"				
 	
 		for i in segments:
 			i.getturtle().reset()
 
 		segments.clear()
+		score = 0
 # Main
 while True:
 	wn.update()
-
+	
 	check_collision_borders()
 
 	# check for collision with food
@@ -66,6 +68,7 @@ while True:
 		new_segment.color('grey')
 		new_segment.penup()
 		segments.append(new_segment)
+		score = score + 10
 
 	for index in range(len(segments)-1, -1,-1):
 		x = segments[index-1].xcor()
@@ -77,6 +80,7 @@ while True:
 		y = head.ycor()
 		segments[0].goto(x, y)
 
+	wn.title("Snake game : " + str(score))
 	move()
 	time.sleep(delay)
 
